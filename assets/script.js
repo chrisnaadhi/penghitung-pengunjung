@@ -21,13 +21,18 @@ const Counter = {
             
         },
         deleteData() {
-            this.saveCount = []
-            localStorage.removeItem("dataKunjungan")
+            let answer = window.confirm("Anda yakin untuk menghapus data ini ?")
+            if (answer && localStorage.getItem("dataKunjungan") !== null) {
+                this.saveCount = []
+                localStorage.removeItem("dataKunjungan")
+            } else {
+                alert("Tidak ada data untuk dihapus!")
+            }
         }
     },
     created() {
         try {
-            if (this.getData !== null) {
+            if (typeof (Storage) !== undefined) {
                 this.saveCount = localStorage.getItem("dataKunjungan").split(",").map(Number);
             } else {
                 console.log("Tidak ada fitur localStorage")
