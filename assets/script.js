@@ -2,7 +2,8 @@ const Counter = {
     data() {
         return {
             counter: 0,
-            saveCount: []
+            saveCount: [],
+            zeroData: "Anda tidak bisa memasukkan data kosong!"
         }
     },
     methods: {
@@ -10,9 +11,14 @@ const Counter = {
             this.counter++
         },
         saveBtn() {
-            this.saveCount.push(this.counter)
-            this.counter = 0
-            localStorage.setItem("dataKunjungan", this.saveCount)
+            if (this.counter !== 0) {
+                this.saveCount.push(this.counter)
+                this.counter = 0
+                localStorage.setItem("dataKunjungan", this.saveCount)
+            } else {
+                alert(this.zeroData)
+            }
+            
         },
         deleteData() {
             this.saveCount = []
